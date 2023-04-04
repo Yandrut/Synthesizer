@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 public class Synthesizer {
     private final JFrame frame = new JFrame ("Synthesizer");
     private boolean shouldGenerate;
-    private int wavePos;
+    private int wavePos;vac
     private final AudioThread audioThread = new AudioThread ( () -> {
 
             if (!shouldGenerate) {
@@ -16,7 +16,7 @@ public class Synthesizer {
             }
             short[] a = new short[AudioThread.BUFFER_SIZE];
             for (int i = 0; i < AudioThread.BUFFER_SIZE; i++) {
-                a[i] = (short) (Short.MAX_VALUE * Math.sin(2 * Math.PI * 440) / AudioInfo.SAMPLE_RATE * wavePos++);
+                a[i] = (short) (Short.MAX_VALUE * Math.sin((2 * Math.PI * 440) / AudioInfo.SAMPLE_RATE * wavePos++));
             }
             return a;
         });
