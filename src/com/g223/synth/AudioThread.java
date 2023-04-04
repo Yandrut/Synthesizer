@@ -2,15 +2,13 @@ package com.g223.synth;
 import Utils.Utils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
-
-
 import java.util.function.Supplier;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 public class AudioThread extends Thread {
-    private Supplier <short[]> bufferSupplier;
-    static final int BUFFER_SIZE = 512;
+    private final Supplier <short[]> bufferSupplier;
+    static final int BUFFER_SIZE = 1024;
     static final int BUFFER_COUNT = 8;
     private final int[] buffers = new int[BUFFER_COUNT];
     private final long device = alcOpenDevice(alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER));
@@ -82,7 +80,6 @@ public class AudioThread extends Thread {
         int err = alcGetError(device);
         if (err != ALC_NO_ERROR) {
             throw new OpenAlException(err);
-
         }
     }
 }
