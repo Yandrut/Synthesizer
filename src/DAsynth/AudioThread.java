@@ -1,4 +1,4 @@
-package com.g223.synth;
+package DAsynth;
 import Utils.Utils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;

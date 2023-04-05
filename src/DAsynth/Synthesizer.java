@@ -1,4 +1,4 @@
-package com.g223.synth;
+package DAsynth;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 public class Synthesizer {
     private final JFrame frame = new JFrame ("Synthesizer");
     private boolean shouldGenerate;
-    private int wavePos;vac
+    private int wavePos;
     private final AudioThread audioThread = new AudioThread ( () -> {
 
             if (!shouldGenerate) {
@@ -20,8 +20,11 @@ public class Synthesizer {
             }
             return a;
         });
-
-    Synthesizer () {
+    // constructor defines key and GUI actions
+    public Synthesizer() {
+        Oscillator o = new Oscillator();
+        o.setLocation(10, 0);
+        frame.add(o);
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

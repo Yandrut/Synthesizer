@@ -1,4 +1,4 @@
-package com.g223.synth;
+package DAsynth;
 import static org.lwjgl.openal.AL10.*;
 public class OpenAlException extends RuntimeException {
     OpenAlException(int errorCode) {
