@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 public class AudioThread extends Thread {
+
     private final Supplier <short[]> bufferSupplier;
     static final int BUFFER_SIZE = 512;
     static final int BUFFER_COUNT = 8;
@@ -32,6 +33,7 @@ public class AudioThread extends Thread {
     boolean isRunning () {
         return running;
     }
+
     @Override
     public synchronized void run () {
         while (!closed) {
@@ -39,6 +41,7 @@ public class AudioThread extends Thread {
                 Utils.invokeProcedure(this::wait,false);
             }
             int processedBuffers = alGetSourcei(source, AL_BUFFERS_PROCESSED);
+
             for (int i = 0; i < processedBuffers; i++) {
                 short [] samples = bufferSupplier.get();
                 if (samples == null) {
@@ -59,14 +62,17 @@ public class AudioThread extends Thread {
         alcDestroyContext(context);
         alcCloseDevice(device);
     }
+
     synchronized void triggerPlayback () {
         running = true;
         notify();
     }
+
     void close () {
         closed = true;
         notify();
     }
+
     private void bufferSamples (short[] samples) {
         int buf = buffers[bufferIndex++];
         alBufferData(buf, AL_FORMAT_MONO16, samples, Synthesizer.AudioInfo.SAMPLE_RATE);
