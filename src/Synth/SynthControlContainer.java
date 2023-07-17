@@ -1,16 +1,24 @@
-package DAsynth;
+package Synth;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SynthControlContainer extends JPanel {
     private final Synthesizer synth;
-    protected Point mouseClickLocation;
+    private Point mouseClickLocation;
     protected boolean on;
 
     public SynthControlContainer (Synthesizer synth) {
     this.synth = synth;
 }
+
+    public Point getMouseClickLocation() {
+        return mouseClickLocation;
+    }
+
+    public void setMouseClickLocation (Point mouseClickLocation) {
+        this.mouseClickLocation = mouseClickLocation;
+    }
 
     public boolean isOn() {
         return on;

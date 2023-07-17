@@ -1,4 +1,4 @@
-package DAsynth;
+package Synth;
 import Utils.Utils;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -8,10 +8,11 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
 public class Synthesizer {
-    private static final HashMap<Character, Double> KEY_FREQUENCIES = new HashMap<> ();
-    private final JFrame frame = new JFrame ("Synthesizer");
+    private final JFrame frame = new JFrame ("Synth");
     private boolean shouldGenerate;
     private final Oscillator[] oscillators = new Oscillator[6];
+    private final WaveVisual waveVisual = new WaveVisual(oscillators);
+    private static final HashMap <Character, Double> KEY_FREQUENCIES = new HashMap<> ();
 
     private final AudioThread audioThread = new AudioThread ( () -> {
         if (!shouldGenerate) {
@@ -20,7 +21,7 @@ public class Synthesizer {
             short[] s = new short[AudioThread.BUFFER_SIZE];
             for (int i = 0; i < AudioThread.BUFFER_SIZE; i++) {
                 double d = 0;
-                for (Oscillator o : oscillators) d += o.nextSample() / oscillators.length;
+                for (Oscillator o : oscillators) d += o.getNextSample() / oscillators.length;
                 s[i] = (short) (Short.MAX_VALUE * d);
             }
             return s;
@@ -29,8 +30,11 @@ public class Synthesizer {
     private final KeyAdapter keyAdapter = new KeyAdapter() {
         @Override
         public void keyPressed(KeyEvent e) {
+            if (!KEY_FREQUENCIES.containsKey(e.getKeyChar())) {
+                return;
+            }
             if (!audioThread.isRunning()) {
-                for (Oscillator o: oscillators) {
+                for (Oscillator o : oscillators) {
                     o.setKeyFrequency(KEY_FREQUENCIES.get(e.getKeyChar()));
                 }
                 shouldGenerate = true;
@@ -49,10 +53,11 @@ public class Synthesizer {
         final int KEY_FREQUENCY_INCREMENT = 2;
         final char[] KEYS = "zxcvbnm,./asdfghjkl;'#qwertyuiop[]".toCharArray();
 
-        for (int i = STARTING_KEY, key = 0; i < KEYS.length * KEY_FREQUENCY_INCREMENT + STARTING_KEY; i += KEY_FREQUENCY_INCREMENT, key++ ) {
+        for (int i = STARTING_KEY, key = 0; i < KEYS.length * KEY_FREQUENCY_INCREMENT + STARTING_KEY; i += KEY_FREQUENCY_INCREMENT, key++) {
             KEY_FREQUENCIES.put(KEYS[key], Utils.Math.getKeyFrequency(i));
         }
     }
+
     public Synthesizer() {
         int y = 0;
         for (int i = 0; i < oscillators.length; i++) {
@@ -61,7 +66,8 @@ public class Synthesizer {
             frame.add(oscillators[i]);
             y+= 105;
         }
-
+            waveVisual.setBounds(290,0,310,310);
+            frame.add(waveVisual);
             frame.addKeyListener(keyAdapter);
             frame.addWindowListener(new WindowAdapter() {
 
@@ -82,7 +88,9 @@ public class Synthesizer {
     public KeyAdapter getKeyAdapter() {
         return keyAdapter;
     }
-
+    public void updateWave() {
+        waveVisual.repaint();
+    }
     public static class AudioInfo {
         public static final int SAMPLE_RATE = 44100;
     }

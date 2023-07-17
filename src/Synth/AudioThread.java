@@ -1,4 +1,4 @@
-package DAsynth;
+package Synth;
 import Utils.Utils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
@@ -8,7 +8,7 @@ import static org.lwjgl.openal.ALC10.*;
 public class AudioThread extends Thread {
 
     private final Supplier <short[]> bufferSupplier;
-    static final int BUFFER_SIZE = 512;
+    static final int BUFFER_SIZE = 256;
     static final int BUFFER_COUNT = 8;
     private final int[] buffers = new int[BUFFER_COUNT];
     private final long device = alcOpenDevice(alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER));
