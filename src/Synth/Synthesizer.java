@@ -10,9 +10,9 @@ import java.util.HashMap;
 public class Synthesizer {
     private final JFrame frame = new JFrame ("Synth");
     private boolean shouldGenerate;
-    private final Oscillator[] oscillators = new Oscillator[6];
+    private final Oscillator[] oscillators = new Oscillator[3];
     private final WaveVisual waveVisual = new WaveVisual(oscillators);
-    private static final HashMap <Character, Double> KEY_FREQUENCIES = new HashMap<> ();
+    private static final HashMap <Character, Double> KEY_FREQUENCIES = new HashMap<>();
 
     private final AudioThread audioThread = new AudioThread ( () -> {
         if (!shouldGenerate) {
@@ -72,7 +72,7 @@ public class Synthesizer {
             frame.addWindowListener(new WindowAdapter() {
 
                 @Override
-            public void windowClosing(WindowEvent e) {
+            public synchronized void windowClosing(WindowEvent e) {
                 audioThread.close();
             }
         });
@@ -92,6 +92,6 @@ public class Synthesizer {
         waveVisual.repaint();
     }
     public static class AudioInfo {
-        public static final int SAMPLE_RATE = 44100;
+        public static final int SAMPLE_RATE = 48000;
     }
 }
