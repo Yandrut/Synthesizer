@@ -5,10 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.function.Function;
 
-public class WaveVisual extends JPanel {
+public class WaveVisualizer extends JPanel {
     private final Oscillator[] oscillators;
 
-    public WaveVisual(Oscillator[] oscillators) {
+    public WaveVisualizer(Oscillator[] oscillators) {
         this.oscillators = oscillators;
         setBorder(Utils.WindowDesign.LINE_BORDER);
     }

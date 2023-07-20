@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class Synthesizer {
     private boolean shouldGenerate;
     private final Oscillator[] oscillators = new Oscillator[3];
-    private final WaveVisual waveVisual = new WaveVisual(oscillators);
+    private final WaveVisualizer waveVisual = new WaveVisualizer(oscillators);
     private static final HashMap <Character, Double> KEY_FREQUENCIES = new HashMap<>();
 
     private final AudioThread audioThread = new AudioThread ( () -> {
@@ -77,6 +77,7 @@ public class Synthesizer {
                 audioThread.close();
             }
         });
+
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(630, 350);
         frame.setResizable(false);

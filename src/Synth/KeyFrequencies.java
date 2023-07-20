@@ -37,5 +37,4 @@ public class KeyFrequencies {
     public static double[] getFreq() {
         return freq;
     }
-
 }
