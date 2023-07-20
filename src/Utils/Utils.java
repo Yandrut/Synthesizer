@@ -1,4 +1,5 @@
 package Utils;
+
 import Synth.SynthControlContainer;
 
 import javax.swing.*;
@@ -38,6 +39,7 @@ public class Utils {
                 throw new ExceptionInInitializerError("Cannot");
             }
         }
+        @GUI
         public static void addMouseListeners(Component component, SynthControlContainer container, int minVal,
                                              int maxVal, int valStep, ReferenceWrapper<Integer> parameter, Procedure procedure) {
             component.addMouseListener(new MouseAdapter() {

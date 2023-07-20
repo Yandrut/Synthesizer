@@ -1,13 +1,12 @@
 package Synth;
-import Utils.ReferenceWrapper;
-import Utils.Utils;
-
+import Utils.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 
 
 public class Oscillator extends SynthControlContainer {
-    private static final int TONE_OFFSET_LIMIT = 200;
+    private static final int TONE_OFFSET_LIMIT = 1000;
     private Wavetable wavetable = Wavetable.Sine; // Default waveform set to size
     private ReferenceWrapper <Integer> toneOffset = new ReferenceWrapper<>(0);
     private ReferenceWrapper <Integer> volume = new ReferenceWrapper<>(100);
@@ -15,7 +14,7 @@ public class Oscillator extends SynthControlContainer {
     private int wavetableStepSize;
     private int wavetableIndex;
 
-
+    @GUI
     public Oscillator(Synthesizer synth) {
         super(synth);
         JComboBox<Wavetable> comboBox = new JComboBox<>(Wavetable.values());
@@ -28,7 +27,8 @@ public class Oscillator extends SynthControlContainer {
         synth.updateWave();
         add(comboBox);
         JLabel toneParameter = new JLabel("x0.00");
-        toneParameter.setBounds(165,65,50,25);
+        toneParameter.setFont(Font.getFont("Free Mono"));
+        toneParameter.setBounds(165,85,50,25);
         toneParameter.setBorder(Utils.WindowDesign.LINE_BORDER);
 
         Utils.ParameterHandling.addMouseListeners(toneParameter,this,-TONE_OFFSET_LIMIT,TONE_OFFSET_LIMIT, 1,toneOffset,
@@ -39,10 +39,12 @@ public class Oscillator extends SynthControlContainer {
                 });
         add(toneParameter);
         JLabel toneText = new JLabel("Tone");
-        toneText.setBounds(172,40,75,25);
+        toneText.setFont(Font.getFont("Free Mono"));
+        toneText.setBounds(165,65,75,25);
         add(toneText);
-        JLabel volumeParameter = new JLabel("100");
-        volumeParameter.setBounds(222,65,50,25);
+        JLabel volumeParameter = new JLabel("100%");
+        volumeParameter.setFont(Font.getFont("Free Mono"));
+        volumeParameter.setBounds(222,85,50,25);
         volumeParameter.setBorder((Utils.WindowDesign.LINE_BORDER));
         add(volumeParameter);
 
@@ -52,7 +54,8 @@ public class Oscillator extends SynthControlContainer {
                     synth.updateWave();
                 });
         JLabel volumeText = new JLabel("Volume");
-        volumeText.setBounds(225,40,75,25);
+        volumeText.setFont(Font.getFont("Free Mono"));
+        volumeText.setBounds(220,65,75,25);
         add(volumeText);
         setSize(300, 115);
         setBorder(Utils.WindowDesign.LINE_BORDER);
