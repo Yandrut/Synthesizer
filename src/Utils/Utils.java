@@ -36,7 +36,7 @@ public class Utils {
                 PARAMETER_ROBOT = new Robot();
             }
             catch (AWTException e) {
-                throw new ExceptionInInitializerError("Cannot");
+                throw new ExceptionInInitializerError();
             }
         }
         @GUI
@@ -91,11 +91,5 @@ public class Utils {
         public static double frequencyToAngularFrequency (double freq) {
             return 2 * PI * freq;
         }
-
-        public static double getKeyFrequency(int keyNum) {
-            return pow(root(2,12),keyNum - 49) * 440;
-        }
-
-        public static double root (double num, double root) { return pow(E, log(num)/root); }
     }
 }

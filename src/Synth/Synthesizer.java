@@ -49,12 +49,10 @@ public class Synthesizer {
 
     // constructor defines key and GUI actions
     static {
-        final int STARTING_KEY = 16;
-        final int KEY_FREQUENCY_INCREMENT = 2;
-        final char[] KEYS = "zxcvbnm,./asdfghjkl;'#qwertyuiop[]".toCharArray();
+        final char[] KEYS = "ZSXDCVGBHNJMQ2W3ER5T6Y7UI,".toCharArray();
 
-        for (int i = STARTING_KEY, key = 0; i < KEYS.length * KEY_FREQUENCY_INCREMENT + STARTING_KEY; i += KEY_FREQUENCY_INCREMENT, key++) {
-            KEY_FREQUENCIES.put(KEYS[key], Utils.Math.getKeyFrequency(i));
+        for (int i = 0; i < KEYS.length; i++) {
+            KEY_FREQUENCIES.put(KEYS[i], KeyFrequencies.getFreq()[i]);
         }
     }
 
@@ -87,13 +85,14 @@ public class Synthesizer {
         frame.setVisible(true);
 
     }
-    @GUI
     public KeyAdapter getKeyAdapter() {
         return keyAdapter;
     }
+
     public void updateWave() {
         waveVisual.repaint();
     }
+
     public static class AudioInfo {
         public static final int SAMPLE_RATE = 48000;
     }
