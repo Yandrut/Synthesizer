@@ -14,7 +14,6 @@ public class Oscillator extends SynthControlContainer {
     private int wavetableStepSize;
     private int wavetableIndex;
 
-    @GUI
     public Oscillator(Synthesizer synth) {
         super(synth);
         JComboBox<Wavetable> comboBox = new JComboBox<>(Wavetable.values());
@@ -42,7 +41,7 @@ public class Oscillator extends SynthControlContainer {
         toneText.setFont(Font.getFont("Free Mono"));
         toneText.setBounds(165,65,75,25);
         add(toneText);
-        JLabel volumeParameter = new JLabel("100%");
+        JLabel volumeParameter = new JLabel(" 100%");
         volumeParameter.setFont(Font.getFont("Free Mono"));
         volumeParameter.setBounds(222,85,50,25);
         volumeParameter.setBorder((Utils.WindowDesign.LINE_BORDER));
@@ -77,6 +76,12 @@ public class Oscillator extends SynthControlContainer {
         keyFrequency = frequency;
         applyToneOffset();
     }
+    @SuppressWarnings("unused")
+    public void setVolumeLevel (int volumeLevel) {
+        // attack, decay, sustain, release for implementation
+        this.volume.value = volumeLevel;
+    }
+
     private double getToneOffset() {
         return toneOffset.value /1000d;
     }

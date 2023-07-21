@@ -16,7 +16,7 @@ public class WaveVisualizer extends JPanel {
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        final int PAD = 25;
+        final int PAD = 1;
         int numSamples = getWidth() - PAD * 2;
         Graphics2D graphics2D = (Graphics2D) graphics;
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

@@ -1,5 +1,5 @@
 package Synth;
-import Utils.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -37,6 +37,7 @@ public class Synthesizer {
                 for (Oscillator o : oscillators) {
                     o.setKeyFrequency(KEY_FREQUENCIES.get(e.getKeyChar()));
                 }
+
                 shouldGenerate = true;
                 audioThread.triggerPlayback();
             }
@@ -49,7 +50,7 @@ public class Synthesizer {
 
     // constructor defines key and GUI actions
     static {
-        final char[] KEYS = "ZSXDCVGBHNJMQ2W3ER5T6Y7UI,".toCharArray();
+        final char[] KEYS = "ZSXDCVGBHNJMQ2W3ER5T6Y7UI,9O0P[=]L.;/".toCharArray();
 
         for (int i = 0; i < KEYS.length; i++) {
             KEY_FREQUENCIES.put(KEYS[i], KeyFrequencies.getFreq()[i]);
@@ -57,7 +58,7 @@ public class Synthesizer {
     }
 
     public Synthesizer() {
-        @GUI
+
         final JFrame frame = new JFrame("Synth");
         int y = 0;
         for (int i = 0; i < oscillators.length; i++) {
@@ -67,7 +68,7 @@ public class Synthesizer {
             y+= 105;
         }
             frame.setFont(Font.getFont("Free Mono"));
-            waveVisual.setBounds(300,0,310,310);
+            waveVisual.setBounds(300,0,330,322);
             frame.add(waveVisual);
             frame.addKeyListener(keyAdapter);
             frame.addWindowListener(new WindowAdapter() {
@@ -84,7 +85,6 @@ public class Synthesizer {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
     public KeyAdapter getKeyAdapter() {
         return keyAdapter;

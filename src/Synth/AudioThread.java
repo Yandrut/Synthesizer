@@ -1,4 +1,5 @@
 package Synth;
+
 import Utils.Utils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
