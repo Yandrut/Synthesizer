@@ -8,11 +8,12 @@ import java.awt.event.ItemEvent;
 public class Oscillator extends SynthControlContainer {
     private static final int TONE_OFFSET_LIMIT = 1000;
     private Wavetable wavetable = Wavetable.Sine; // Default waveform set to size
-    private ReferenceWrapper <Integer> toneOffset = new ReferenceWrapper<>(0);
-    private ReferenceWrapper <Integer> volume = new ReferenceWrapper<>(100);
+    private final ReferenceWrapper <Integer> toneOffset = new ReferenceWrapper<>(0);
+    private final ReferenceWrapper <Integer> volume = new ReferenceWrapper<>(100);
     private double keyFrequency;
     private int wavetableStepSize;
     private int wavetableIndex;
+
 
     public Oscillator(Synthesizer synth) {
         super(synth);
@@ -76,11 +77,6 @@ public class Oscillator extends SynthControlContainer {
         keyFrequency = frequency;
         applyToneOffset();
     }
-    @SuppressWarnings("unused")
-    public void setVolumeLevel (int volumeLevel) {
-        // attack, decay, sustain, release for implementation
-        this.volume.value = volumeLevel;
-    }
 
     private double getToneOffset() {
         return toneOffset.value /1000d;
@@ -90,12 +86,11 @@ public class Oscillator extends SynthControlContainer {
         return volume.value / 100d;
     }
 
-    public double getNextSample () {
+    public double getNextSample() {
         double sample = wavetable.getSamples()[wavetableIndex] * getVolumeMultiplier();
         wavetableIndex = (wavetableIndex + wavetableStepSize) % Wavetable.SIZE;
         return sample;
     }
-
     private void applyToneOffset() {
         wavetableStepSize = (int) (Wavetable.SIZE * Utils.Math.offsetTone(keyFrequency,getToneOffset()) / Synthesizer.AudioInfo.SAMPLE_RATE);
     }
