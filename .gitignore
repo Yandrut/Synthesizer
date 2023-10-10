@@ -4,4 +4,5 @@ hs_err_pid232121.log
 replay_pid232121.log
 /src/Synth/Envelopes.java
 /src/Synth/State.java
+/.idea/artifacts
 .gitignore

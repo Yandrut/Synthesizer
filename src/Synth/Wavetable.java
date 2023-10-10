@@ -1,6 +1,7 @@
 package Synth;
 
 import Utils.Utils;
+import static Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
 
 enum Wavetable {
     Sine,Square,Saw,Triangle;
@@ -9,9 +10,9 @@ enum Wavetable {
     private final float[] samples = new float[SIZE];
 
     static {
-        final double FUNDAMENTAL_FREQUENCY = 1d / (SIZE / (double) Synthesizer.AudioInfo.SAMPLE_RATE);
+        final double FUNDAMENTAL_FREQUENCY = 1d / (SIZE / (double) SAMPLE_RATE);
         for (int i = 0; i < SIZE; ++i) {
-            double t = i / (double) Synthesizer.AudioInfo.SAMPLE_RATE;
+            double t = i / (double) SAMPLE_RATE;
             double tDivp = t / (1d / FUNDAMENTAL_FREQUENCY);
             Sine.samples[i] = (float) Math.sin(Utils.Math.frequencyToAngularFrequency(FUNDAMENTAL_FREQUENCY) * t);
             Square.samples[i] = Math.signum(Sine.samples[i]);

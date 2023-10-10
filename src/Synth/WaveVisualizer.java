@@ -1,6 +1,6 @@
 package Synth;
 
-import Utils.*;
+import Utils.Utils.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.function.Function;
@@ -10,7 +10,7 @@ public class WaveVisualizer extends JPanel {
 
     public WaveVisualizer(Oscillator[] oscillators) {
         this.oscillators = oscillators;
-        setBorder(Utils.WindowDesign.LINE_BORDER);
+        setBorder(WindowDesign.LINE_BORDER);
     }
 
     @Override

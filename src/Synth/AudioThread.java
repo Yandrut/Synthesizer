@@ -6,6 +6,7 @@ import org.lwjgl.openal.ALC;
 import java.util.function.Supplier;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
+import static Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
 public class AudioThread extends Thread {
 
     private final Supplier <short[]> bufferSupplier;
@@ -75,7 +76,7 @@ public class AudioThread extends Thread {
 
     private void bufferSamples (short[] samples) {
         int buf = buffers[bufferIndex++];
-        alBufferData(buf, AL_FORMAT_MONO16, samples, Synthesizer.AudioInfo.SAMPLE_RATE);
+        alBufferData(buf, AL_FORMAT_MONO16, samples, SAMPLE_RATE);
         alSourceQueueBuffers(source, buf);
         bufferIndex %= BUFFER_COUNT;
     }

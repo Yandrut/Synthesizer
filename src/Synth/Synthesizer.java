@@ -18,13 +18,13 @@ public class Synthesizer {
         if (!shouldGenerate) {
                 return null;
             }
-            short[] s = new short[AudioThread.BUFFER_SIZE];
+            short[] samples = new short[AudioThread.BUFFER_SIZE];
             for (int i = 0; i < AudioThread.BUFFER_SIZE; i++) {
                 double d = 0;
                 for (Oscillator o : oscillators) d += o.getNextSample() / oscillators.length;
-                s[i] = (short) (Short.MAX_VALUE * d);
+                samples[i] = (short) (Short.MAX_VALUE * d);
             }
-            return s;
+            return samples;
         });
 
     private final KeyAdapter keyAdapter = new KeyAdapter() {
