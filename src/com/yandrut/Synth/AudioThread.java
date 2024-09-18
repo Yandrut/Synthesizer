@@ -1,12 +1,12 @@
-package Synth;
+package com.yandrut.audio.Synth;
 
-import Utils.Utils;
+import com.yandrut.audio.Synth.Utils.Utils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import java.util.function.Supplier;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
-import static Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
+import static com.yandrut.audio.Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
 public class AudioThread extends Thread {
 
     private final Supplier <short[]> bufferSupplier;

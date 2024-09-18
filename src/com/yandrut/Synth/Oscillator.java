@@ -1,8 +1,8 @@
-package Synth;
-import Utils.*;
-import static Utils.Utils.WindowDesign.*;
-import static Utils.Utils.Math.*;
-import static Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
+package com.yandrut.audio.Synth;
+import com.yandrut.audio.Synth.Utils.*;
+import static com.yandrut.audio.Synth.Utils.Utils.WindowDesign.*;
+import static com.yandrut.audio.Synth.Utils.Utils.Math.*;
+import static com.yandrut.audio.Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
@@ -27,7 +27,6 @@ public class Oscillator extends SynthControlContainer {
         comboBox.addItemListener(l -> {
             if (l.getStateChange() == ItemEvent.SELECTED) wavetable = (Wavetable) l.getItem();
         });
-        synth.updateWave();
         add(comboBox);
         JLabel toneParameter = new JLabel("x0.00");
         toneParameter.setFont(Font.getFont("Free Mono"));
@@ -39,7 +38,6 @@ public class Oscillator extends SynthControlContainer {
                 () -> {
                     applyToneOffset();
                     toneParameter.setText(" x" + String.format("%.3f",getToneOffset()));
-                    synth.updateWave();
                 });
         add(toneParameter);
         JLabel toneText = new JLabel("Tone");
@@ -55,7 +53,6 @@ public class Oscillator extends SynthControlContainer {
         Utils.ParameterHandling.addMouseListeners(volumeParameter,this,0,100,1,volume,
                 () -> {
                     volumeParameter.setText(" " + volume.value + "%");
-                    synth.updateWave();
                 });
         JLabel volumeText = new JLabel("Volume");
         volumeText.setFont(Font.getFont("Free Mono"));

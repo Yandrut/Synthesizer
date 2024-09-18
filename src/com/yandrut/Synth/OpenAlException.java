@@ -1,4 +1,4 @@
-package Synth;
+package com.yandrut.audio.Synth;
 import static org.lwjgl.openal.AL10.*;
 
 public class OpenAlException extends RuntimeException {

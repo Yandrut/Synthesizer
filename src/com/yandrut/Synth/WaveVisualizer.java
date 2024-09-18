@@ -1,6 +1,6 @@
-package Synth;
+package com.yandrut.audio.Synth;
 
-import Utils.Utils.*;
+import com.yandrut.audio.Synth.Utils.Utils.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.function.Function;
@@ -8,7 +8,7 @@ import java.util.function.Function;
 public class WaveVisualizer extends JPanel {
     private final Oscillator[] oscillators;
 
-    public WaveVisualizer(Oscillator[] oscillators) {
+    private WaveVisualizer(Oscillator[] oscillators) {
         this.oscillators = oscillators;
         setBorder(WindowDesign.LINE_BORDER);
     }

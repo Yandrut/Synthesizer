@@ -1,4 +1,4 @@
-package Synth;
+package com.yandrut.audio.Synth;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,6 @@ import java.util.HashMap;
 public class Synthesizer {
     private boolean shouldGenerate;
     private final Oscillator[] oscillators = new Oscillator[3];
-    private final WaveVisualizer waveVisual = new WaveVisualizer(oscillators);
     private static final HashMap <Character, Double> KEY_FREQUENCIES = new HashMap<>();
 
     private final AudioThread audioThread = new AudioThread ( () -> {
@@ -59,7 +58,7 @@ public class Synthesizer {
 
     public Synthesizer() {
 
-        final JFrame frame = new JFrame("Synth");
+        final JFrame frame = new JFrame("com.yandrut.audio.Synth.Synth");
         int y = 0;
         for (int i = 0; i < oscillators.length; i++) {
             oscillators[i] = new Oscillator(this);
@@ -68,8 +67,6 @@ public class Synthesizer {
             y+= 105;
         }
             frame.setFont(Font.getFont("Free Mono"));
-            waveVisual.setBounds(300,0,330,322);
-            frame.add(waveVisual);
             frame.addKeyListener(keyAdapter);
             frame.addWindowListener(new WindowAdapter() {
 
@@ -88,10 +85,6 @@ public class Synthesizer {
     }
     public KeyAdapter getKeyAdapter() {
         return keyAdapter;
-    }
-
-    public void updateWave() {
-        waveVisual.repaint();
     }
 
     public static class AudioInfo {

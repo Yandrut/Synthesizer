@@ -1,7 +1,9 @@
-package Synth;
+package com.yandrut.audio.Synth;
 
-import Utils.Utils;
-import static Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
+import com.yandrut.audio.Synth.Utils.Utils;
+import java.lang.Math;
+
+import static com.yandrut.audio.Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
 
 enum Wavetable {
     Sine,Square,Saw,Triangle;
