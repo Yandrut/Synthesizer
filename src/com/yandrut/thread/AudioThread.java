@@ -1,26 +1,28 @@
-package com.yandrut.audio.Synth;
+package com.yandrut.thread;
 
-import com.yandrut.audio.Synth.Utils.Utils;
+import com.yandrut.exception.OpenAlException;
+import com.yandrut.utils.Utils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALC;
 import java.util.function.Supplier;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
-import static com.yandrut.audio.Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
+import static com.yandrut.audio.Synthesizer.AudioInfo.SAMPLE_RATE;
 public class AudioThread extends Thread {
 
     private final Supplier <short[]> bufferSupplier;
-    static final int BUFFER_SIZE = 512;
+
     static final int BUFFER_COUNT = 8;
     private final int[] buffers = new int[BUFFER_COUNT];
     private final long device = alcOpenDevice(alcGetString(0, ALC_DEFAULT_DEVICE_SPECIFIER));
     private final long context = alcCreateContext(device, new int[1]);
+    private static final int BUFFER_SIZE = 512;
     private final int source;
     private int bufferIndex;
     private boolean closed;
     private boolean running;
 
-    AudioThread(Supplier <short[]> bufferSupplier) {
+    public AudioThread(Supplier <short[]> bufferSupplier) {
         this.bufferSupplier = bufferSupplier;
         alcMakeContextCurrent(context);
         AL.createCapabilities(ALC.createCapabilities(device));
@@ -32,8 +34,13 @@ public class AudioThread extends Thread {
         catchInternalException();
         start();
     }
-    boolean isRunning () {
+
+    public boolean isRunning () {
         return running;
+    }
+
+    public static int getBufferSize() {
+        return BUFFER_SIZE;
     }
 
     @Override
@@ -65,12 +72,12 @@ public class AudioThread extends Thread {
         alcCloseDevice(device);
     }
 
-    synchronized void triggerPlayback () {
+    public synchronized void triggerPlayback () {
         running = true;
         notify();
     }
 
-    void close () {
+    public void close () {
         closed = true;
     }
 

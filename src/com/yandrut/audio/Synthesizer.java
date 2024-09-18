@@ -1,4 +1,6 @@
-package com.yandrut.audio.Synth;
+package com.yandrut.audio;
+
+import com.yandrut.thread.AudioThread;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
+import static com.yandrut.thread.AudioThread.*;
 
 public class Synthesizer {
     private boolean shouldGenerate;
@@ -17,8 +20,8 @@ public class Synthesizer {
         if (!shouldGenerate) {
                 return null;
             }
-            short[] samples = new short[AudioThread.BUFFER_SIZE];
-            for (int i = 0; i < AudioThread.BUFFER_SIZE; i++) {
+            short[] samples = new short[getBufferSize()];
+            for (int i = 0; i < getBufferSize(); i++) {
                 double d = 0;
                 for (Oscillator o : oscillators) d += o.getNextSample() / oscillators.length;
                 samples[i] = (short) (Short.MAX_VALUE * d);

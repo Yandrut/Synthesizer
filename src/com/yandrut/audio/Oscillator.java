@@ -1,8 +1,10 @@
-package com.yandrut.audio.Synth;
-import com.yandrut.audio.Synth.Utils.*;
-import static com.yandrut.audio.Synth.Utils.Utils.WindowDesign.*;
-import static com.yandrut.audio.Synth.Utils.Utils.Math.*;
-import static com.yandrut.audio.Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
+package com.yandrut.audio;
+import com.yandrut.utils.ReferenceWrapper;
+import com.yandrut.utils.Utils;
+import static com.yandrut.audio.Synthesizer.AudioInfo.SAMPLE_RATE;
+import static com.yandrut.utils.Utils.Math.offsetTone;
+import static com.yandrut.utils.Utils.WindowDesign.LINE_BORDER;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
@@ -11,7 +13,7 @@ import java.awt.event.ItemEvent;
 public class Oscillator extends SynthControlContainer {
     private static final int TONE_OFFSET_LIMIT = 1000;
     private Wavetable wavetable = Wavetable.Sine; // Default waveform set to size
-    private final ReferenceWrapper <Integer> toneOffset = new ReferenceWrapper<>(0);
+    private final ReferenceWrapper<Integer> toneOffset = new ReferenceWrapper<>(0);
     private final ReferenceWrapper <Integer> volume = new ReferenceWrapper<>(100);
     private double keyFrequency;
     private int wavetableStepSize;
@@ -51,9 +53,7 @@ public class Oscillator extends SynthControlContainer {
         add(volumeParameter);
 
         Utils.ParameterHandling.addMouseListeners(volumeParameter,this,0,100,1,volume,
-                () -> {
-                    volumeParameter.setText(" " + volume.value + "%");
-                });
+                () -> volumeParameter.setText(" " + volume.value + "%"));
         JLabel volumeText = new JLabel("Volume");
         volumeText.setFont(Font.getFont("Free Mono"));
         volumeText.setBounds(220,65,75,25);

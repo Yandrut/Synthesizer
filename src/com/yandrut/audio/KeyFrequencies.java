@@ -1,4 +1,4 @@
-package com.yandrut.audio.Synth;
+package com.yandrut.audio;
 
 public class KeyFrequencies {
     // Every value in this array is mapped to a key to emulate piano keyboard

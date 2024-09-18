@@ -2,7 +2,7 @@
 /out/
 hs_err_pid232121.log
 replay_pid232121.log
-/src/com/yandrut/audio/Synth/Envelopes.java
-/src/com/yandrut/audio/Synth/State.java
+/src/com/yandrut/Envelopes.java
+/src/com/yandrut/State.java
 /.idea/artifacts
 .gitignore

@@ -1,4 +1,4 @@
-package com.yandrut.audio.Synth;
+package com.yandrut.audio;
 
 import javax.swing.*;
 import java.awt.*;

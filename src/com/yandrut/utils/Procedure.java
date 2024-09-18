@@ -1,4 +1,4 @@
-package com.yandrut.audio.Synth.Utils;
+package com.yandrut.utils;
 
 public interface Procedure {
     void invoke() throws Exception;

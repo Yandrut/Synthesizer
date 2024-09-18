@@ -1,6 +1,6 @@
-package com.yandrut.audio.Synth.Utils;
+package com.yandrut.utils;
 
-import com.yandrut.audio.Synth.SynthControlContainer;
+import com.yandrut.audio.SynthControlContainer;
 
 import javax.swing.*;
 import javax.swing.border.Border;

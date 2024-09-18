@@ -1,11 +1,11 @@
-package com.yandrut.audio.Synth;
+package com.yandrut.audio;
 
-import com.yandrut.audio.Synth.Utils.Utils;
+import com.yandrut.utils.Utils;
 import java.lang.Math;
 
-import static com.yandrut.audio.Synth.Synthesizer.AudioInfo.SAMPLE_RATE;
+import static com.yandrut.audio.Synthesizer.AudioInfo.SAMPLE_RATE;
 
-enum Wavetable {
+public enum Wavetable {
     Sine,Square,Saw,Triangle;
 
     static final int SIZE = 8192;

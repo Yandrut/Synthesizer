@@ -1,4 +1,4 @@
-package com.yandrut.audio.Synth.Utils;
+package com.yandrut.utils;
 
 public class ReferenceWrapper<T>{
     public T value;
