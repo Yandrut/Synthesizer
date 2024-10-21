@@ -4,10 +4,7 @@ import com.yandrut.thread.AudioThread;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.HashMap;
 import static com.yandrut.thread.AudioThread.*;
 
@@ -17,10 +14,11 @@ public class Synthesizer {
     private static final HashMap <Character, Double> KEY_FREQUENCIES = new HashMap<>();
 
     private final AudioThread audioThread = new AudioThread ( () -> {
-        if (!shouldGenerate) {
+            if (!shouldGenerate) {
                 return null;
             }
             short[] samples = new short[getBufferSize()];
+
             for (int i = 0; i < getBufferSize(); i++) {
                 double d = 0;
                 for (Oscillator o : oscillators) d += o.getNextSample() / oscillators.length;
@@ -30,27 +28,31 @@ public class Synthesizer {
         });
 
     private final KeyAdapter keyAdapter = new KeyAdapter() {
+
         @Override
         public void keyPressed(KeyEvent e) {
-            if (!KEY_FREQUENCIES.containsKey(e.getKeyChar())) {
+            if (!KEY_FREQUENCIES.containsKey(e.getKeyChar()) && e.getKeyCode() != KeyEvent.VK_ESCAPE) {
                 return;
             }
-            if (!audioThread.isRunning()) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                System.out.println("Terminating program");
+                System.exit(0);
+            }
+            else if (!audioThread.isRunning()) {
                 for (Oscillator o : oscillators) {
                     o.setKeyFrequency(KEY_FREQUENCIES.get(e.getKeyChar()));
                 }
-
                 shouldGenerate = true;
                 audioThread.triggerPlayback();
             }
         }
+
         @Override
         public void keyReleased(KeyEvent e) {
             shouldGenerate = false;
         }
     };
 
-    // constructor defines key and GUI actions
     static {
         final char[] KEYS = "ZSXDCVGBHNJMQ2W3ER5T6Y7UI,9O0P[=]L.;/".toCharArray();
 
@@ -61,7 +63,7 @@ public class Synthesizer {
 
     public Synthesizer() {
 
-        final JFrame frame = new JFrame("com.yandrut.audio.Synth.Synth");
+        final JFrame frame = new JFrame("Synth");
         int y = 0;
         for (int i = 0; i < oscillators.length; i++) {
             oscillators[i] = new Oscillator(this);
@@ -73,7 +75,7 @@ public class Synthesizer {
             frame.addKeyListener(keyAdapter);
             frame.addWindowListener(new WindowAdapter() {
 
-                @Override
+            @Override
             public synchronized void windowClosing(WindowEvent e) {
                 audioThread.close();
             }
@@ -86,7 +88,7 @@ public class Synthesizer {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-    public KeyAdapter getKeyAdapter() {
+    public KeyAdapter getKeyQAdapter() {
         return keyAdapter;
     }
 

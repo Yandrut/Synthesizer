@@ -7,7 +7,9 @@ public enum State {
     SUSTAIN(3),
     RELEASE(4);
 
-    State(double state) {
+    final int state;
 
+    State(int state) {
+        this.state = state;
     }
 }

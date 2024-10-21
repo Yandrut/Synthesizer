@@ -12,7 +12,7 @@ import static java.lang.Math.*;
 
 
 public class Utils {
-    public static void invokeProcedure (Procedure procedure, boolean printStackTrace) {
+    public static void invokeProcedure(Procedure procedure, boolean printStackTrace) {
         try {
             procedure.invoke();
         }
@@ -24,7 +24,7 @@ public class Utils {
     }
 
     public static class WindowDesign {
-        public static final Border LINE_BORDER = BorderFactory.createLineBorder(Color.black);
+        public static final Border LINE_BORDER = BorderFactory.createLineBorder(Color.red);
     }
 
     public static class ParameterHandling {
@@ -57,7 +57,7 @@ public class Utils {
                 }
             });
 
-            component.addMouseMotionListener(new MouseAdapter() {
+                component.addMouseMotionListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     super.mouseReleased(e);

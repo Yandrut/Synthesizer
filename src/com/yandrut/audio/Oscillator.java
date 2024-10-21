@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 
-
 public class Oscillator extends SynthControlContainer {
     private static final int TONE_OFFSET_LIMIT = 1000;
     private Wavetable wavetable = Wavetable.Sine; // Default waveform set to size
@@ -18,7 +17,6 @@ public class Oscillator extends SynthControlContainer {
     private double keyFrequency;
     private int wavetableStepSize;
     private int wavetableIndex;
-
 
     public Oscillator(Synthesizer synth) {
         super(synth);
